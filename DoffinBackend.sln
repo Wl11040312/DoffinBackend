@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36804.6 d17.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DoffinApi", "DoffinApi\DoffinApi.csproj", "{A3EE7C83-BCA7-4E60-93A9-A8F0CF0F40A3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A3EE7C83-BCA7-4E60-93A9-A8F0CF0F40A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A3EE7C83-BCA7-4E60-93A9-A8F0CF0F40A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A3EE7C83-BCA7-4E60-93A9-A8F0CF0F40A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A3EE7C83-BCA7-4E60-93A9-A8F0CF0F40A3}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B2E2E033-2E0C-4DB1-B0A5-D3B6CCC934F3}
+	EndGlobalSection
+EndGlobal

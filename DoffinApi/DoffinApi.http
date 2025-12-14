@@ -1,0 +1,6 @@
+@DoffinApi_HostAddress = http://localhost:5116
+
+GET {{DoffinApi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
