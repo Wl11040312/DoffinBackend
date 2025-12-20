@@ -1,4 +1,6 @@
+using DoffinDb.Context;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace DoffinApi.Controllers
 {
@@ -6,6 +8,8 @@ namespace DoffinApi.Controllers
     [Route("[controller]")]
     public class WeatherForecastController : ControllerBase
     {
+        private readonly AppDbContext _db;
+
         private static readonly string[] Summaries = new[]
         {
             "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
@@ -13,9 +17,10 @@ namespace DoffinApi.Controllers
 
         private readonly ILogger<WeatherForecastController> _logger;
 
-        public WeatherForecastController(ILogger<WeatherForecastController> logger)
+        public WeatherForecastController(ILogger<WeatherForecastController> logger, AppDbContext db)
         {
             _logger = logger;
+            _db = db;
         }
 
         [HttpGet(Name = "GetWeatherForecast")]
@@ -28,6 +33,13 @@ namespace DoffinApi.Controllers
                 Summary = Summaries[Random.Shared.Next(Summaries.Length)]
             })
             .ToArray();
+        }
+
+        [HttpGet("testdb")]
+        public async Task<IActionResult> GetDBTestTable()
+        {
+            var users = await _db.Testing.ToListAsync();
+            return Ok(users);
         }
     }
 }

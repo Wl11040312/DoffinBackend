@@ -1,3 +1,8 @@
+using DotNetEnv;
+using Microsoft.EntityFrameworkCore;
+
+DotNetEnv.Env.Load();
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -6,6 +11,16 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddEndpointsApiExplorer();
+
+builder.Services.AddDbContext<DoffinDb.Context.AppDbContext>(options =>
+options.UseNpgsql(builder.Configuration.GetConnectionString("MyDatabase"), option =>
+{
+    option.EnableRetryOnFailure(5, TimeSpan.FromSeconds(10), null);
+}));
+
+
+Console.WriteLine(builder.Configuration.GetConnectionString("MyDatabase"));
+
 
 var app = builder.Build();
 
