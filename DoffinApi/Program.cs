@@ -1,9 +1,38 @@
 using DotNetEnv;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.EntityFrameworkCore;
 
 DotNetEnv.Env.Load();
 
 var builder = WebApplication.CreateBuilder(args);
+
+// CORS
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("DoffinFrontendOnly", policy =>
+    {
+
+        policy.WithOrigins("https://wl11040312.github.io/", "localhost").AllowAnyHeader().AllowAnyMethod();
+    });
+});
+
+// JWT
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
+{
+    options.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuer = true,
+        ValidateAudience = true,
+        ValidateLifetime = true,
+        ValidateIssuerSigningKey = true,
+        ValidIssuer = builder.Configuration["JWT:Issuer"],
+        ValidAudience = builder.Configuration["JWT:Audience"],
+        IssuerSigningKey = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(builder.Configuration["JWT:Key"]))
+    };
+});
+
+builder.Services.AddAuthorization();
 
 // Add services to the container.
 
@@ -40,6 +69,8 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseHttpsRedirection();
+app.UseCors("DoffinFrontendOnly");
+app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();
 
